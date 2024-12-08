@@ -11,6 +11,49 @@ const StringTransformers = () => {
     const [kebabCase, setKebabCase] = useState("")
     const [trim, setTrim] = useState("")
 
+    const toLowercase = (inputVal) => {
+        setLowerCase(inputVal.toLowerCase());
+    }
+
+    const toUppercase = (inputVal) => {
+        setUpperCase(inputVal.toUpperCase());
+    }
+
+    const toCamelCase = () => {
+        const words = inputVal.split(" ")
+        const camelCaseString = inputVal.split(" ").reduce((acc, word, index) => {
+            return index < words.length - 1 ?  acc + word.charAt(0).toUpperCase() + word.slice(1).toLowerCase() + " " : acc + word.charAt(0).toUpperCase() + word.slice(1).toLowerCase(); 
+        }, "")
+        setCamelCase(camelCaseString)
+    }
+
+    const toPascalCase = () => {
+        const pascalStr = inputVal.split(" ").reduce((acc, curr) =>  {
+            return acc + curr.charAt(0).toUpperCase() + curr.slice(1).toLowerCase()
+        }, "")
+        setPascalCase(pascalStr);
+    }
+
+
+    const toSnakeCase = () => {
+        let str = inputVal.split(" ").reduce((acc, curr, index) => {
+            return index > 0 ? acc + "-" + curr : acc + curr;  
+        })
+        setSnakeCase(str);
+    }
+
+    const toKebabCase = () => {
+        const str = inputVal.split(" ").reduce((acc, curr, index) => {
+            return index > 0 ? acc + "_" + curr : acc + curr;
+        })
+        setKebabCase(str);
+    }
+
+
+    const toTrim = () => {
+        const str = inputVal.split(" ").reduce((acc, curr) => acc + curr);
+        setTrim(str);
+    }
 
     useEffect(()=> {
         toLowercase(inputVal);
@@ -22,80 +65,6 @@ const StringTransformers = () => {
         toTrim();
     }, [inputVal])
 
-    const toLowercase = (inputVal) => {
-        setLowerCase(inputVal.toLowerCase());
-    }
-
-    const toUppercase = (inputVal) => {
-        setUpperCase(inputVal.toUpperCase());
-    }
-
-    const toCamelCase = () => {
-        let arr = inputVal.split(" ");
-        let str = "";
-        for (let i=0; i<arr.length; i++) {
-            if (i > 0) {
-                let fLetter = arr[i].charAt(0).toUpperCase();
-                let letters = arr[i].slice(1).toLowerCase();
-                let fullLetters = fLetter + letters;
-                str += fullLetters;
-            } else {
-                str += arr[i];
-            }
-        }
-        setCamelCase(str);
-    }
-
-    const toPascalCase = () => {
-        let arr = inputVal.split(" ");
-        let str = "";
-        for (let i=0; i<arr.length; i++) {
-            let fLetter = arr[i].charAt(0).toUpperCase();
-            let letters = arr[i].slice(1).toLowerCase();
-            let fullLetters = fLetter + letters;
-            str += fullLetters;
-        }
-        setPascalCase(str);
-    }
-
-
-    const toSnakeCase = () => {
-        let arr = inputVal.split(" ");
-        let str = "";
-        for (let i = 0; i < arr.length; i++) {
-            if (i > 0) {
-                let letters = "-" + arr[i];
-                str += letters;
-            } else {
-                str += arr[i];
-            }
-        }
-        setSnakeCase(str);
-    }
-
-    const toKebabCase = () => {
-        let arr = inputVal.split(" ");
-        let str = "";
-        for (let i = 0; i < arr.length; i++) {
-            if (i > 0) {
-                let letters = "_" + arr[i];
-                str += letters;
-            } else {
-                str += arr[i];
-            }
-        }
-        setKebabCase(str);
-    }
-
-
-    const toTrim = () => {
-        let arr = inputVal.split(" ");
-        let str = "";
-        for (let i = 0; i < arr.length; i++) {
-            str += arr[i];
-        }
-        setTrim(str);
-    }
 
     const handleInputChange = (e) => {
         let val = e.target.value;
