@@ -1,8 +1,9 @@
+import StringTransformers from "./components/StringTransformers"
 
 function App() {
 
   return (
-    <div></div>
+    <StringTransformers />
   )
 }
 
